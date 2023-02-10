@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import tacocloud.models.data.Ingredient;
 import tacocloud.models.data.Taco;
 import tacocloud.models.repositories.JdbcIngredientRepository;
+import tacocloud.models.repositories.TacoRepository;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -24,9 +25,12 @@ public class DesignTacoController {
 
     private final JdbcIngredientRepository ingredientRepository;
 
+    private TacoRepository designRepo;
+
     @Autowired
-    public DesignTacoController(JdbcIngredientRepository ingredientRepository) {
+    public DesignTacoController(JdbcIngredientRepository ingredientRepository, TacoRepository designRepo) {
         this.ingredientRepository = ingredientRepository;
+        this.designRepo = designRepo;
     }
 
     @GetMapping()
