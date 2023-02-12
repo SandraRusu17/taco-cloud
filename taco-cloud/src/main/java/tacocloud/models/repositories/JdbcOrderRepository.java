@@ -49,6 +49,15 @@ public class JdbcOrderRepository implements OrderRepository {
         @SuppressWarnings("unchecked")
         Map<String, Object> values = objectMapper.convertValue(order, Map.class);
         values.put("placedAt", order.getPlacedAt());
+        values.put("deliveryName", order.getName());
+        values.put("deliveryStreet", order.getStreet());
+        values.put("deliveryCity", order.getCity());
+        values.put("deliveryState", order.getState());
+        values.put("deliveryZip", order.getZip());
+        values.put("deliveryCCNumber", order.getCcNumber());
+        values.put("deliveryCCExpiration", order.getCcExpiration());
+        values.put("deliveryCcCVV", order.getCcCVV());
+        values.put("deliveryPlacedAt", order.getPlacedAt());
 
         long orderId = orderInserter.executeAndReturnKey(values).longValue();
         return orderId;
