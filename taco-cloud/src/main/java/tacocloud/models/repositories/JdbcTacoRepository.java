@@ -29,8 +29,8 @@ public class JdbcTacoRepository implements TacoRepository {
     public Taco save(Taco taco) {
         long tacoId = saveTacoInfo(taco);
         taco.setId(tacoId);
-        for (Ingredient ingredient : taco.getIngredients()) {
-            saveIngredientToTaco(ingredient, tacoId);
+        for (String ingredientId : taco.getIngredients()) {
+            saveIngredientToTaco(tacoId, ingredientId);
         }
         return taco;
     }
@@ -39,7 +39,7 @@ public class JdbcTacoRepository implements TacoRepository {
         taco.setCreatedAt(new Date());
         PreparedStatementCreator psc =
                 new PreparedStatementCreatorFactory(
-                        "insert into Taco (name, createdAt) value (?,?)",
+                        "insert into Taco (name, createdAt) values (?,?)",
                         Types.VARCHAR, Types.TIMESTAMP
                 ).newPreparedStatementCreator(
                         Arrays.asList(
@@ -53,11 +53,11 @@ public class JdbcTacoRepository implements TacoRepository {
     }
 
     private void saveIngredientToTaco(
-            Ingredient ingredient, long tacoId) {
+            long tacoId, String ingredientId) {
         jdbc.update(
                 "insert into Taco_Ingredients (taco, ingredient) " +
                         "values (?, ?)",
-                tacoId, ingredient.getId());
+                tacoId, ingredientId);
     }
 
 }

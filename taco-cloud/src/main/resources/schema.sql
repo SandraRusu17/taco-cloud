@@ -5,7 +5,7 @@ create table if not exists Ingredient (
 );
 
 create table if not exists Taco (
-    id int not null primary key,
+    id identity,
     name varchar(50) not null,
     createdAt timestamp not null
 );
