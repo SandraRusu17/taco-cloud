@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import tacocloud.models.data.Ingredient;
 import tacocloud.models.data.Order;
 import tacocloud.models.data.Taco;
-import tacocloud.models.repositories.JdbcIngredientRepository;
+import tacocloud.models.repositories.IngredientRepository;
 import tacocloud.models.repositories.TacoRepository;
 
 import javax.validation.Valid;
@@ -23,14 +23,14 @@ import java.util.stream.Collectors;
 @SessionAttributes("order")
 public class DesignTacoController {
 
-    private final JdbcIngredientRepository ingredientRepository;
+    private final IngredientRepository ingredientRepository;
 
-    private TacoRepository designRepo;
+    private TacoRepository tacoRepository;
 
     @Autowired
-    public DesignTacoController(JdbcIngredientRepository ingredientRepository, TacoRepository designRepo) {
+    public DesignTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
         this.ingredientRepository = ingredientRepository;
-        this.designRepo = designRepo;
+        this.tacoRepository = tacoRepository;
     }
 
     @ModelAttribute(name = "order")
@@ -69,7 +69,7 @@ public class DesignTacoController {
             return "design";
         }
 
-        Taco saved = designRepo.save(design);
+        Taco saved = tacoRepository.save(design);
         order.addDesign(saved);
         return "redirect:/orders/current";
     }

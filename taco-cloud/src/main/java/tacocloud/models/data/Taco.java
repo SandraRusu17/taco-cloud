@@ -3,9 +3,11 @@ package tacocloud.models.data;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class Taco {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @CreatedDate
     private Date createdAt;
 
     @NonNull
@@ -25,8 +28,12 @@ public class Taco {
     private String name;
 
     @ManyToMany(targetEntity = Ingredient.class)
+    @JoinTable(name = "taco_ingredients",
+            joinColumns = @JoinColumn(name = "taco"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient")
+    )
     @Size(min = 1, message = "You must choose at least 1 ingredient")
-    private List<String> ingredients;
+    private List<Ingredient> ingredients = new ArrayList<>();
 
     @PrePersist
     void createdAt() {
