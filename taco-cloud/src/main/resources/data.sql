@@ -24,3 +24,8 @@ insert into Ingredient (id, name, type)
                     values ('SLSA', 'Salsa', 'SAUCE');
 insert into Ingredient (id, name, type)
                     values ('SRCR', 'Sour Cream', 'SAUCE');
+
+insert into Users (username, password, enabled)
+                    values ('user', '$2a$12$niR/w.qAPibx45WPfMVAR.nvVrooZKXu96KC/7yneN6xXNdtacm3W', 'true');
+insert into UserAuthorities (username, authority)
+                         values ('user', 'USER');
