@@ -46,6 +46,12 @@ alter table Taco_Order_Tacos
 create table if not exists Users (
     username varchar(50) not null primary key,
     password varchar(250) not null,
+    fullname varchar(50) not null,
+    street varchar(50) not null,
+    city varchar(50) not null,
+    state varchar(50) not null,
+    zip int(50) not null,
+    phoneNumber int(50) not null,
     enabled boolean not null
 );
 
