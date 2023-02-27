@@ -10,3 +10,7 @@ logging:
 
 server:
   port: 9090
+
+taco:
+  orders:
+    pageSize: 10
