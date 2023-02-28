@@ -1,12 +1,6 @@
 logging:
-  path: /resources/
-  file: TacoCloud.log
   level:
-    root: WARN
-    org:
-      springframework:
-        security: DEBUG
-
+    tacos: DEBUG
 
 server:
   port: 9090
@@ -14,3 +8,16 @@ server:
 taco:
   orders:
     pageSize: 10
+
+---
+spring:
+  profiles: prod
+
+    datasource:
+      url: jdbc:mysql://localhost/tacocloud
+      username: tacouser
+      password: tacopassword
+
+  logging:
+    level:
+      tacos: WARN
